@@ -1,0 +1,14 @@
+<table class="user_list">
+<tr>
+	<th>Member Name</th>
+	<th>Department</th>
+	<th>&nbsp;</th>
+</tr>
+{foreach from=$members item='m'}
+<tr{if $m->id == $addedUserId} class="highlight"{/if}>
+	<td>{$m->getName()}</td>
+	<td>{$m->getDepartment()}</td>
+	<td><a href="#" onclick="return removeMember({$group->id},{$m->id});">remove</a></td>
+</tr>
+{/foreach}
+</table>

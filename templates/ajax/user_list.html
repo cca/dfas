@@ -1,0 +1,26 @@
+{if count($search_users)}
+<table class="user_list">
+<tr>
+	<th>Name</th>
+	<th>Username</th>
+	<th>Department</th>
+	<th>Admin?</th>
+</tr>
+{	foreach from=$search_users item='suser'}
+<tr{if !$suser->active} class="inactive"{/if}>
+	<td>
+{		if $user->isAdmin() || $suser->isUser()}
+		<a href="{$ctl->url('manage_users','show',$suser->id)|escape}">{$suser->getName()}</a>
+{		else}
+		{$suser->getName()}
+{		/if}
+	</td>
+	<td>{$suser->username}</td>
+	<td>{$suser->getDepartment()}</td>
+	<td>{if $suser->isAdmin()}Admin{/if}</td>
+</tr>
+{	/foreach}
+</table>
+{else}
+No records matched your search.
+{/if}

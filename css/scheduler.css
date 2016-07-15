@@ -1,0 +1,434 @@
+body {
+	font-size: 11px;
+	background: #fff;
+	text-align: center;
+	margin: 0;
+	padding: 0;
+}
+
+select {
+	font-size: 11px;
+}
+
+#top-bar {
+  height: 38px;
+  background: url(../images/top_back.jpg) repeat-x;
+  font-size: 9px;
+  color: #fff;
+  line-height: 37px;
+  margin-bottom: 25px;
+}
+#top-bar .inner {
+  width: 1000px;
+  margin: 0 auto;
+  position: relative;
+}
+#ip {
+  position: absolute;
+  top: 0;
+  left: 25px;
+}
+#today {
+  position: absolute;
+  top: 0;
+  left: 418px;
+}
+
+#page { 
+	/* width: 765px; */
+	width: 1000px;
+	margin: 0px auto;
+	text-align: left;
+}
+
+#header {
+	margin: 0 0 3px;
+	height: 111px;
+	position: relative;
+}
+#header a:hover {
+  text-decoration: none;
+}
+
+#nav {
+	width: 765px;
+	height: 28px;
+	margin: 0px;
+	background: #333333;
+}
+
+#nav img { padding: 0px 0px 0px 17px }
+
+#content {
+	width: 765px;
+	margin: 0px;
+	padding-bottom: 20px;
+}
+
+#content {
+	float: left;
+	width: 570px;
+}
+
+#sidebar {
+	background: url('../images/bar.sep.gif') repeat-y;
+	float: right;
+	width: 195px;
+}
+
+#logo-link {
+  display: block;
+  padding-left: 10px;
+}
+
+.breadcrumb {
+  margin-left: 15px;
+  font-size: 10px;
+}
+.breadcrumb a {
+  text-decoration: none;
+  color: #4D93B8;
+}
+
+span.whoAmI {
+  position: absolute;
+	color: #000;
+	top: 90px;
+	left: 550px;
+	
+	font-family: "Arial Narrow", Verdana, Arial, sans-serif;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+#content-section {
+	width: 765px;
+	margin: 40px auto 0;
+	padding: 15px 0px 40px 0px;
+}
+
+#footer {
+  text-transform: uppercase;
+  font-size: 10px;
+  position: relative;
+  clear: both;
+  padding: 40px 0 48px 0;
+}
+#color-bar {
+  padding-left: 10px;
+  display: block;
+  margin-bottom: 5px;
+}
+.footer-links {
+  margin: 0 0 0 10px;
+  padding: 0;
+  list-style: none;
+}
+.footer-links li {
+  float: left;
+  margin: 0 0 0 20px;
+}
+.footer-links a {
+  text-decoration: none;
+  color: #4D93B8;
+  font-size: 10px;
+}
+p.footer-feeds {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 10px;
+  color: #000;
+  position: absolute;
+  top: 49px;
+  right: 23px;
+}
+p.footer-feeds a {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+p.footer-feeds a img {
+  border: none;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+/* ~~~ Content Navigation Block ~~~ */
+
+#content-nav {
+	float: left;
+	width: 189px;
+}
+
+#content-nav ul {
+	float: left;
+	padding: 0px;
+	margin: 34px 0 0 5px;
+}
+
+/* Establishes default type face for website */ 
+a, div, h1, h2, h3, h4, input, li, p, strong, table, textarea, address {
+	font-family: Arial, Helvetica, Verdana, helvetica, sans-serif;
+}
+
+h1, h2, h3, h4, h5 { 
+  color: #000; 
+  text-transform: uppercase;
+}
+
+h1 {
+	font-size: 21px;
+	padding: 0px 0px 10px 10px;
+	margin: 0px;
+}
+
+h2 {
+	font-size: 14px;
+	margin: 10px;
+}
+
+h2 img {
+	margin: 0px 15px 0px 5px;
+}
+
+h3 {
+	font-size: 12px;
+	padding: 0px 0px 2px 10px;
+	margin: 0px;
+}
+
+h4 {
+	font-size: 14px;
+	padding: 0px 0px 2px 10px;
+	margin: 0px;
+}
+
+h5 {
+	font-size: 12px;
+	padding: 10px 0px 2px 10px;
+	margin: 0px;
+}
+
+p {
+	color: #333333;
+	font-size: 11px;
+	line-height: 15px;
+	padding: 0px 20px 10px 10px;
+	margin: 0px;
+}
+
+p img {
+	margin: 0px 0px 0px 8px;
+}
+
+p.date {
+	font-size: 12px;
+	padding: 0px 0px 20px 10px;
+	margin: 0px;
+}
+
+ul,ol {
+	margin: 3px 10px 12px 0px;
+}
+
+li {
+	color: #333333;
+	font-size: 11px;
+	line-height: 15px;
+	margin: 3px 10px 0px 0px;
+}
+
+input, td {
+	color: #333333;
+	font-size: 11px;
+}
+
+strong {
+	color: #333333;
+	font-size: 11px;
+}
+
+/* **************** HYPERLINK STYLES **************** */
+
+a:visited {
+	color: #366fa9;
+}
+
+a:hover, a:hover strong {
+	text-decoration: underline;
+}
+
+a, a strong {
+	color: #336699;
+}
+
+div.error {
+	background: #fee;
+	color: #c00;
+	border: 1px solid #c00;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px;
+	margin: 0 10px 10px;
+}
+div.message {
+	background: #eef;
+	color: #00c;
+	border: 1px solid #00c;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 5px;
+	margin: 0 10px 10px;
+}
+
+div#schedule_loading {
+	font-weight: bold;
+	line-height: 24px;
+	height: 24px;
+	padding: 0;
+	margin: 0 10px 10px;
+	text-align: center;
+}
+div#schedule_loading img {
+	vertical-align: middle;
+}
+
+div#schedule_controls {
+	background: #efefef;
+	font-size: 10px;
+	padding: 0 10px;
+	margin: 0 10px 10px;
+	line-height: 24px;
+	height: 24px;
+}
+#schedule_switcher {
+	float: right;
+	height: 24px;
+	line-height: 24px;
+}
+#schedule_switcher select {
+	vertical-align: middle;
+}
+
+table.schedule {
+	border-collapse: collapse;
+	border-left: 1px dotted #aab;
+	border-bottom: 1px dotted #aab;
+	margin: 0 0 0 10px;
+	width: 96%;
+}
+table.schedule th {
+	background: #dde;
+	border-top: 1px dotted #aab;
+	border-right: 1px dotted #aab;
+	font-size: 11px;
+	padding: 5px;
+}
+table.schedule td {
+	border-top: 1px dotted #aab;
+	border-right: 1px dotted #aab;
+	font-size: 10px;
+	vertical-align: top;
+	width: 14%;
+}
+table.schedule td.blackout,
+table.schedule td.blackout div.time {
+	background: #f3f3f3;
+}
+table.schedule td.highlight,
+table.schedule td.highlight div.time {
+	background: #ffc;
+}
+table.schedule td.mine,
+table.schedule td.mine div.time,
+table.schedule td.mine div.reserved {
+	background: #ff9;
+	color: #334;
+	font-weight: bold;
+}
+table.schedule div.time {
+	background: #eef;
+	float: left;
+	font-size: 9px;
+	color: #667;
+	padding: 2px 5px;
+}
+table.schedule div.reserved {
+	clear: left;
+	color: #889;
+	padding: 5px 5px 10px;	
+}
+table.schedule div.available {
+	clear: left;
+	padding: 5px 5px 10px;
+}
+table.schedule div.available a {
+	font-weight: bold;
+}
+table.schedule div.unused {
+	clear: left;
+	color: #bbc;
+	font-size: 9px;
+	padding: 5px 5px 10px;	
+}
+
+ul.myReservations {
+	list-style: none;
+	margin: 0 10px;
+	padding: 0;
+}
+ul.myReservations li {
+	border-bottom: 1px dotted #aab;
+	margin: 0 0 3px 0;
+	padding: 0 0 3px 0;
+}
+ul.myReservations a {
+	background: #eee;
+	font-size: 9px;
+	padding: 2px;
+	margin-left: 3px;
+	text-decoration: none;
+}
+ul.myReservations a:hover {
+	background: #336699;
+}
+
+#sidebar p.note {
+	font-size: 9px;
+}
+
+span.note {
+	color: #f33;
+}
+
+p.logout {
+	border-top: 1px solid #efefe0;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 10px 0;
+	margin: 0 10px;
+}
+
+div.content_wrapper {
+	margin: 0 10px 10px;
+}
+
+div.choice_box ul {
+	background: #fff;
+	border: 1px solid #666;
+  list-style-type:none;
+  margin:0px;
+  padding:0px;
+}
+div.choice_box ul li.selected { background-color: #cca;}
+div.choice_box ul li {
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:2px;
+  cursor:pointer;
+}
+div.choice_box span.id { display: none; }

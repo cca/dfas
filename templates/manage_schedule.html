@@ -1,0 +1,139 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+{include file='layout/notify.html'}
+
+<div id="schedule_controls">
+
+<form method="get" action="{$ctl->url('manage_schedule')|escape}" id="schedule_switcher">
+&nbsp;<select name="schedule" onchange="$('schedule_switcher').submit();">
+<option value="">Switch schedule...</option>
+{html_options options=$scheduleOptions}
+</select>
+</form>
+
+<div id="time_nav">
+<span class="thisMonth">{$firstDate|date_format:'%B %Y'}</span> |
+<a href="manage_schedule.php?month={$previousMonth}&amp;year={$previousYear}&amp;schedule={$schedule->id}">&laquo; previous</a> | 
+<a href="manage_schedule.php?month={$nextMonth}&amp;year={$nextYear}&amp;schedule={$schedule->id}">next &raquo;</a>
+</div><!-- /#time_nav -->
+
+</div>
+
+
+<form action="{$ctl->url('manage_schedule','update',$schedule->id)|escape}" method="post" id="schedule_form">
+
+<table class="schedule" cellpadding="0" cellspacing="0">
+<tr>
+{foreach from=$dayNames item='dayName'}
+	<th>{$dayName}</th>
+{/foreach}
+</tr>
+
+{assign var='dow' value=0}
+<tr>
+{section name="startBlanks" loop=$firstDay}
+	<td>&nbsp;</td>
+{	assign var='dow' value=$dow+1}
+{/section}
+
+{section name='dayLoop' loop=$daysInMonth}
+{	assign var='dayOfMonth' value=$smarty.section.dayLoop.iteration}
+{	if $scheduleForm.start_time.$dayOfMonth}
+{		assign var='open' value=`$scheduleForm.open.$dayOfMonth`}
+{		assign var='start_time' value=`$scheduleForm.start_time.$dayOfMonth`}
+{		assign var='end_time' value=`$scheduleForm.end_time.$dayOfMonth`}
+{	else}
+{		assign var='open' value=`$defaultsForm.default_open.$dow`}
+{		assign var='start_time' value=`$defaultsForm.default_start_time.$dow`}
+{		assign var='end_time' value=`$defaultsForm.default_end_time.$dow`}
+{	/if}
+	<td class="{if !$open}closed{/if}{if $passData.bad_schedule_days[$dayOfMonth]} windowError{/if}" id="day_{$dayOfMonth}"><div class="dayOfMonth">
+			<span class="dayOfMonth">{$dayOfMonth}</span>
+			<input type="checkbox" name="open[{$dayOfMonth}]" id="open_{$dayOfMonth}" class="checkbox" onclick="toggleScheduleDay({$dayOfMonth});" {if $open}checked="checked" {/if}/>
+		</div>
+		<div class="times">
+			<select name="start_time[{$dayOfMonth}]">
+{	html_options options=$timeValues selected=$start_time}
+			</select>
+			<select name="end_time[{$dayOfMonth}]">
+{	html_options options=$timeValues selected=$end_time}
+			</select>
+		</div>
+		</td>
+{	assign var='dow' value=$dow+1}
+{	if $dow == 7 && $dayOfMonth < $daysInMonth}
+{		assign var='dow' value=0}
+</tr>
+<tr>
+{	/if}
+{/section}
+
+{math equation="7-x" x=$dow assign='endBlankCount'}
+{section name="endBlanks" loop=$endBlankCount}
+	<td>&nbsp;</td>
+{/section}
+</tr>
+</table>
+
+<input type="hidden" name="month" value="{$month}" />
+<input type="hidden" name="year" value="{$year}" />
+
+<p style="text-align: right;"><input type="submit" value="Save Changes" id="submit" /></p>
+
+</form>
+
+<h2>Schedule Defaults (applies to all months)</h2>
+
+<form action="{$ctl->url('manage_schedule','update_defaults',$schedule->id)|escape}" method="post">
+
+<table class="schedule" cellpadding="0" cellspacing="0">
+<tr>
+{foreach from=$dayNames item='dayName'}
+	<th>{$dayName}</th>
+{/foreach}
+</tr>
+<tr>
+{section name="defaults" loop=7}
+{	assign var='dow' value=$smarty.section.defaults.index}
+{	assign var='open' value=`$defaultsForm.default_open.$dow`}
+{	assign var='start_time' value=`$defaultsForm.default_start_time.$dow`}
+{	assign var='end_time' value=`$defaultsForm.default_end_time.$dow`}
+	<td class="{if !$open}closed{/if}{if $passData.bad_defaults[$dow] || $reservedDefaults[$dow]} windowError{/if}" id="default_day_{$dow}"><div class="dayOfMonth">
+		<span class="dayOfMonth">Default</span>
+			<input type="checkbox" name="default_open[{$dow}]" id="default_open_{$dow}" class="checkbox" onclick="toggleDefaultDay({$dow});" {if $open}checked="checked" {/if}/>
+		</div>
+		<div class="times">
+			<select name="default_start_time[{$dow}]">
+{	html_options options=$timeValues selected=$start_time}
+			</select>
+			<select name="default_end_time[{$dow}]">
+{	html_options options=$timeValues selected=$end_time}
+			</select>
+		</div>
+		</td>
+{/section}
+</tr>
+
+</table>
+
+<p style="text-align: right;"><input type="submit" value="Save Defaults" id="submit_defaults" /></p>
+
+</form>
+
+</div><!-- /#content -->
+
+<div id="sidebar">
+
+<h2>Manage the Schedule</h2>
+
+<p>For each day, select the opening time from the first dropdown, and the closing time from the second dropdown.</p>
+
+<p>If the studio is closed on a given day, uncheck the checkbox for that day.</p>
+
+<p>When you are finished, click "Save Changes".</p>
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

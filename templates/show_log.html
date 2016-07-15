@@ -1,0 +1,62 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+{if count($entries)}
+<table class="log" cellspacing="0">
+{foreach from=$entries item='entry'}
+{	assign var='thisDate' value=$entry->logtime|date_format:'%B %e,<br />%Y'}
+{	if $thisDate != $lastDate}
+{		assign var='lastDate' value=$thisDate}
+<tr class="newDate">
+	<td class="date">{$thisDate}</td>
+{	else}
+<tr>
+	<td></td>
+{	/if}
+	<td class="time">{$entry->logtime|date_format:'%l:%M&nbsp;%p'}</td>
+{	if $entry->priority == $smarty.const.PEAR_LOG_INFO}
+{		assign var='messageClass' value='info'}
+{	elseif $entry->priority == $smarty.const.PEAR_LOG_NOTICE}
+{		assign var='messageClass' value='notice'}
+{	else}
+{		assign var='messageClass' value='warning'}
+{	/if}
+	<td class="{$messageClass} message">{$entry->message}</td>
+</tr>
+{/foreach}
+</table>
+{/if}
+	
+</div>
+
+<div id="sidebar">
+
+<h2>View System Log</h2>
+
+<form action="logs.php" method="get" class="sidebar_form">
+
+<p>From:<br />
+{html_select_date prefix='start' month_format='%b' day_value_format='%02d' time=$startDate}
+</p>
+
+<p>To:<br />
+{html_select_date prefix='end' month_format='%b' day_value_format='%02d' time=$endDate}
+</p>
+
+<p>Search:<br />
+<input type="text" name="search" value="{$logForm.search}" /></p>
+
+<p><input type="submit" name="submit" value="Generate" id="submit" /></p>
+
+</form>
+
+<p>Use the form above to browse the system log for a date range you specify.</p>
+
+<p>You may also search the text of the log using the "Search" box. For instance, you can search for activity related to a specific user by searching for that user's username.</p>
+
+<p>The username at the beginning of each entry is the user that caused the action.</p>
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

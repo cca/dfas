@@ -1,0 +1,37 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+<div id="search_results">
+
+{if count($usergroups)}
+<table class="user_list">
+<tr>
+	<th>Group</th>
+	<th>Member Access</th>
+</tr>
+{	foreach from=$usergroups item='group'}
+{		assign var='rules' value=$group->getRules()}
+<tr>
+	<td><a href="manage_groups.php?action=edit&amp;id={$group->id}">{$group->name|escape}</a></td>
+	<td>
+{		foreach from=$rules item='rule'}
+		{$rule->getDescription()}.
+{		/foreach}
+	</td>
+</tr>
+{	/foreach}
+</table>
+{else}
+No records matched your search.
+{/if}
+
+</div>
+
+</div>
+
+<div id="sidebar">
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

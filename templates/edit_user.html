@@ -1,0 +1,63 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+{include file='layout/notify.html'}
+
+<form method="post" action="{$ctl->url('manage_users',$user_form.action)|escape}" id="user_form">
+
+<p><label for="username">Username:</label>
+<input type="text" name="username" id="username" value="{$user_form.username}" size="16" /> @cca.edu</p>
+
+<p><label for="first_name">Name (first, last):</label>
+<input type="text" name="first_name" value="{$user_form.first_name}" id="first_name" />
+<input type="text" name="last_name" value="{$user_form.last_name}" id="last_name" /></p>
+
+<p><label for="department">Department:</label>
+<select name="department" id="department">
+<option value=""></option>
+{assign var='lastGroup' value='Undergraduate'}
+<optgroup label="{$lastGroup}">
+{foreach from=$departments key='nick' item='dept'}
+{	if $dept.1 != $lastGroup}
+{		assign var='lastGroup' value=$dept.1}
+</optgroup>
+<optgroup label="{$dept.1}">
+{	/if}
+<option value="{$nick}"{if $nick==$user_form.department} selected="selected"{/if}>{$dept.0}</option>
+{/foreach}
+</optgroup>
+</select></p>
+
+<p><label for="active">Active?</label>
+<input type="checkbox" name="active" id="active" {if $user_form.active} checked="checked"{/if}/> Accounts must be active in order to log in and make reservations.</p>
+
+<p><label for="admin">Admin?</label>
+<input type="checkbox" name="admin" id="admin" class="checkbox" {if $user_form.admin} checked="checked"{/if}/> Admins have <b>full control</b> over all accounts and schedules.</p>
+
+<p><input type="submit" name="submit" value="Save Changes" id="submit" />
+	<a href="{$ctl->url('manage_users','show',$user_form.user_id)|escape}" id="cancel">cancel</a></p>
+
+{if $user_form.user_id}
+<input type="hidden" name="user_id" value="{$user_form.user_id}" />
+{/if}
+</form>
+
+{if $user_form.user_id && $user->isAdmin() && $user_form.user_id != $user->id}
+<form method="post" action="{$ctl->url('manage_users','delete')|escape}" id="delete_form" onsubmit="return confirm('Are you sure you want to delete this account?  This cannot be undone.  Deleting this account will also delete any upcoming reservations for this account.');">
+
+<hr />
+
+<p><input type="submit" name="submit" value="Delete this Account" id="submit_delete" /></p>
+
+<input type="hidden" name="user_id" value="{$user_form.user_id}" />
+</form>
+{/if}
+
+</div>
+
+<div id="sidebar">
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

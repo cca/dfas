@@ -1,0 +1,9 @@
+{if !$search_user->id}
+<i>No user selected.</i>
+{else}
+<b>{$search_user->getName()}</b> ({$search_user->username})<br />
+Dept: {$search_user->getDepartment()|default:'<i>none</i>'}<br />
+
+<input type="hidden" id="reserve_user_id" value="{$search_user->id}" />
+<input type="hidden" id="reserve_user_name" value="{$search_user->getName()|escape}" />
+{/if}

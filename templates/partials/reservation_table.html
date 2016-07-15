@@ -1,0 +1,13 @@
+<table class="reservations">
+{	foreach from=$reservations item='r'}
+{		assign var='scheduleId' value=$r->schedule_id}
+<tr{if $r->id == $passData.highlightId} class="highlight"{elseif $r->no_show} class="no_show"{/if}>
+	<td>{$r->date|date_format:'%B %e, %Y'}</td>
+	<td>{$r->start_time|date_format:'%l:%M %p'}</td>
+	<td>{$scheduleNames.$scheduleId}</td>
+	<td>{if $r->no_show
+		}<b>no-show</b> <a href="{$ctl->url('manage_users','undo_noshow',$r->id)|escape}" class="little_button">undo</a>{else
+		}<a href="{$ctl->url('manage_users','mark_noshow',$r->id)|escape}" onclick="return confirmMark();" class="little_button">mark no-show</a>{/if}</td>
+</tr>
+{	/foreach}
+</table>

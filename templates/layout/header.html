@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>DFAS Scheduler</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" media="all" href="css/scheduler.css" />
+<script type="text/javascript" src="js/prototype.js"></script>
+<script type="text/javascript" src="js/scriptaculous.js"></script>
+<script type="text/javascript" src="js/dateformat.js"></script>
+<script type="text/javascript" src="js/scheduler.js"></script>
+{if $user->isAdmin()}
+<link rel="stylesheet" href="css/admin.css" type="text/css" media="all" />
+<script type="text/javascript" src="js/admin.js"></script>
+{/if}
+</head>
+
+<body>
+
+<div id="top-bar"><div class="inner">
+  
+<div id="ip">Your IP Address is {$smarty.server.REMOTE_ADDR}.</div>
+<div id="today">Today's date is {$smarty.now|date_format:"%A, %B %e"}.</div>
+
+</div></div><!-- /#top-bar -->
+
+<div id="page">
+
+<div id="header">
+<a href="http://technology.cca.edu/" id="logo-link"><img src="{$smarty.const.SITE_URL}/images/cca-ets.png" alt="CCA Educational Technology Services" width="1026" height="111" border="0" /></a>
+
+<span class="whoAmI">
+	{if $user->id}
+  Logged in as <b>{$user->getName()}</b>
+  {else}
+  You are not logged in.
+  {/if}
+</span>
+
+
+</div>
+
+<div class="breadcrumb">
+  You Are Here: 
+  <a href="{$smarty.const.ETS_URL}/">ETS Home</a> › 
+  <a href="{$smarty.const.ETS_URL}/hours" title="">Hours &amp; Facilities</a> › 
+  <a href="{$smarty.const.ETS_URL}/hours/printing" title="">Print Services</a> › 
+  <a href="{$smarty.const.ETS_URL}/hours/printing/dfas">DFAS</a> › 
+  Scheduler
+</div> <!-- /#breadcrumb -->
+
+
+<div id="content-section">
+
+{if $user->isAdmin()}
+{	include file='layout/admin_nav.html'}
+{/if}
+
+<h1>{$h1|default:'LaserCamm Schedule'}</h1>

@@ -1,0 +1,76 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+{include file='layout/notify.html'}
+
+<div id="search_results">
+
+{include file='ajax/user_list.html'}	
+
+</div>
+
+</div>
+
+<div id="sidebar">
+
+<p class="create_account"><a href="{$ctl->url('manage_users','init')|escape}">Add an Account &raquo;</a></p>
+
+<h2>Search Accounts</h2>
+
+<form id="search_form" onsubmit="return searchUsers();" action="">
+
+<p><label for="search_name">Name/Username:</label><br />
+<input type="text" name="search_name" value="" id="search_name" /></p>
+
+<p><label for="search_department">Department:</label><br />
+<select name="search_department" id="search_department">
+<option value="">&#8211; any department &#8211;</option>
+{assign var='lastGroup' value='Undergraduate'}
+<optgroup label="{$lastGroup}">
+{foreach from=$departments key='nick' item='dept'}
+{	if $dept.1 != $lastGroup}
+{		assign var='lastGroup' value=$dept.1}
+</optgroup>
+<optgroup label="{$dept.1}">
+{	/if}
+<option value="{$nick}">{$dept.0}</option>
+{/foreach}
+</optgroup>
+</select></p>
+
+<p><label for="search_admin">Admin?</label><br />
+<select name="search_admin" id="search_admin">
+<option value="">&#8211; either &#8211;</option>
+<option value="yes">yes</option>
+<option value="no">no</option>
+</select></p>
+
+<p><label for="search_active">Active?</label><br />
+<select name="search_active" id="search_active">
+<option value="">&#8211; either &#8211;</option>
+<option value="yes">yes</option>
+<option value="no">no</option>
+</select></p>
+
+<p><input type="submit" value="Search" /></p>
+
+</form>
+
+<script type="text/javascript">
+//<![CDATA[
+{literal}
+function searchUsers() {
+	new Ajax.Updater('search_results',
+		{/literal}'{$ctl->url('manage_users','ajax_user_search')}'{literal},
+		{
+			parameters: Form.serialize('search_form')
+		}); 
+	return false;
+}
+{/literal}
+//]]>
+</script>
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

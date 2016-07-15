@@ -1,0 +1,11 @@
+{assign var='schedule' value=$email_reservation->getSchedule()}
+Hi {$email_user->first_name},
+
+This is an automated message to let you know that your reservation at the Digital Fine Art Studio has been CANCELED for:
+
+{$schedule->name}
+{$email_reservation->date|date_format:'%A, %B %e, %Y'}
+{$email_reservation->start_time|date_format:'%l:%M %p'}
+
+Thanks,
+CCA Scheduler

@@ -1,0 +1,14 @@
+Hi {$email_user->first_name},
+
+This is an automated message to notify you of your online account information for the CCA Digital Fine Art Studio Scheduler.
+
+{if !$email_user->active}
+Your account has been marked as not active, meaning you cannot currently login and make reservations.  If you need your account activated, contact the Studio Manager.
+{else}
+You can view the schedules for DFAS resources, as well as make or cancel reservations, at {$smarty.const.SITE_URL}/.
+
+Your username is {$email_user->username}, and your password is the same as your password for your CCA email account.
+{/if}
+
+Thanks,
+CCA Scheduler

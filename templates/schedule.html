@@ -1,0 +1,80 @@
+{literal}
+<script type="text/javascript">
+//<![CDATA[
+toggleScheduleControls = function() {
+	$('schedule_controls').hide();
+	$('schedule_loading').show();
+};
+showSchedule = function(date,scheduleId) {
+	new Ajax.Updater('schedule_wrapper','index.php',{parameters: {
+		action: 'ajax_show_schedule',
+		date: date,
+		schedule: scheduleId
+	}});
+	toggleScheduleControls();
+	return false;
+}
+//]]>
+</script>
+{/literal}
+
+{include file='layout/notify.html'}
+
+<div id="schedule_loading" style="display: none;"><img src="images/spinner.gif" alt="Loading..." /> Loading...</div>
+
+<div id="schedule_controls">
+
+<form method="get" action="index.php" id="schedule_switcher">
+&nbsp;<select name="schedule" onchange="$('schedule_switcher').submit();">
+<option value="">Switch schedule...</option>
+{html_options options=$scheduleOptions}
+</select>
+</form>
+
+<div id="time_nav">
+<a href="index.php?date={$schedule->previous_stamp}&amp;schedule={$schedule->id}" onclick="return showSchedule('{$schedule->previous_stamp}',{$schedule->id});">&laquo; previous</a> | 
+<a href="index.php?schedule={$schedule->id}" onclick="return showSchedule('',{$schedule->id});">this week</a> |
+<a href="index.php?date={$schedule->next_stamp}&amp;schedule={$schedule->id}" onclick="return showSchedule('{$schedule->next_stamp}',{$schedule->id});">next &raquo;</a>
+</div><!-- /#time_nav -->
+
+</div>
+
+
+<table class="schedule" cellpadding="0" cellspacing="0">
+<tr>
+{foreach from=$schedule->day_stamps item='stamp'}
+	<th>{$stamp|date_format:'%A'}<br />
+		{$stamp|date_format:'%b %e %y'}</th>
+{/foreach}
+</tr>
+
+{assign var='nowStamp' value=$smarty.now}
+{foreach from=$schedule->time_stamps item='time'}
+<tr>
+{	foreach from=$schedule->day_stamps item='day'}
+{		assign var='cell' value=$cells.$time.$day}
+<td{if $cell.td_class} class="{$cell.td_class}"{/if}>
+	<div class="time">{$time|date_format:'%l:%M %p'}</div>
+{		if $cell.div_class}
+	<div class="{$cell.div_class}">
+{			if $cell.can_reserve}
+{				reservation_link date=$day time=$time schedule=$schedule->id user=$user}
+{			else}
+		{$cell.label}{if $cell.reserved && $user->isAdmin() && $cell.stamp > $nowStamp}<br />
+{				cancel_link date=$day time=$time schedule=$schedule->id}{/if}
+{			/if}
+	</div>
+{		/if}
+</td>
+{	/foreach}
+</tr>
+{/foreach}
+
+<tr>
+{foreach from=$schedule->day_stamps item='stamp'}
+	<th>{$stamp|date_format:'%A'}<br />
+		{$stamp|date_format:'%b %e %y'}</th>
+{/foreach}
+</tr>
+</table>
+

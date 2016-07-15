@@ -1,0 +1,30 @@
+<h2>Make a Reservation</h2>
+
+<p>Click a link that reads "Available" on the schedule for the day and time that you would like to reserve.</p>
+
+{assign var='upcomingReservations' value=$user->getUpcomingReservations($schedule->id)}
+{if count($upcomingReservations)}
+<h2>Your Upcoming Reservations</h2>
+
+<ul class="myReservations">
+{foreach from=$upcomingReservations item='ur'}
+<li>{$ur->date|date_format:'%A, %B %e, %Y'}<br />
+	{$ur->start_time|date_format:'%l:%M %p'} 
+{	make_timestamp date=$ur->date|strtotime time=$ur->start_time|strtotime assign='thisStamp'}
+{	if $thisStamp-$smarty.now >= $smarty.const.CANCEL_AHEAD_OFFSET}
+	<a href="reservation.php?action=cancel&amp;date={$ur->date|strtotime}&amp;time={$ur->start_time|strtotime}&amp;schedule={$ur->schedule_id}">cancel</a>
+{	/if}
+</li>
+{/foreach}
+</ul>
+
+<p class="note">Reservations cannot be cancelled with less than 24 hours notice.</p>
+{/if}
+
+<h2>About You</h2>
+
+<p>Your department is listed as <b>{$user->getDepartment()}</b>. If this is incorrect, please <a href="mailto:{$smarty.const.HELP_EMAIL}">let us know</a>.</p>
+
+{if !$user->isAdmin()}
+<p class="logout"><a href="{$ctl->url('authentication','logout')|escape}">Log out &raquo;</a></p>
+{/if}

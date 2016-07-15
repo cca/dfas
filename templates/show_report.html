@@ -1,0 +1,83 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+{include file='layout/notify.html'}
+
+{if $title}
+<p>{$title}</p>
+{/if}
+
+{if $reservationCount}
+<table class="report" cellspacing="0">
+<tr>
+	<th>Department</th>
+	<th>Reservations</th>
+	<th>Users</th>
+</tr>
+{foreach from=$deptReservations item='r'}
+{	assign var='deptNick' value=$r->department}
+{	assign var='percent' value=$r->reservations/$reservationCount*100|string_format:'%d'}
+{	if $percent == 0}
+{		assign var='percent' value='&lt;1'}
+{	/if}
+<tr>
+	<td>{$departments[$deptNick].0}</td>
+	<td>{$r->reservations} <span class="small">({$percent}%)</span></td>
+	<td>{$r->users}</td>
+</tr>
+{/foreach}
+{	assign var='percent' value=$nonDeptCount/$reservationCount*100|string_format:'%d'}
+<tr>
+	<td><i>no department</i></td>
+	<td>{$nonDeptCount} <span class="small">({$percent}%)</span></td>
+</tr>
+<tr>
+	<td><b>Total</b></td>
+	<td><b>{$reservationCount}</b></td>
+	<td><b>{$userCount}</b></td>
+</table>
+
+<h2>Legend</h2>
+
+<div class="legend">
+
+<dl>
+	<dt>Reservations</dt><dd>The number of reservations made by users in a department during the specified time period.</dd>
+	<dt>Users</dt><dd>The number of users in a department that made reservations during the specified time period.</dd>
+</div>
+
+{else}
+<p>No reservations for the values selected.</p>
+{/if}
+
+</div>
+
+<div id="sidebar">
+
+<h2>Generate a Report</h2>
+
+<form action="reports.php" method="get" class="sidebar_form">
+
+<p>From:<br />
+{html_select_date prefix='start' month_format='%b' day_value_format='%02d' time=$startDate}</p>
+
+<p>To:<br />
+{html_select_date prefix='end' month_format='%b' day_value_format='%02d' time=$endDate}
+</p>
+
+<ul>
+{foreach from=$scheduleOptions key='sid' item='sname'}
+<li><input type="checkbox" name="schedules[{$sid}]" id="schedules_{$sid}" {if in_array($sid,$scheduleIds)} checked="checked"{/if}/> <label for="schedules_{$sid}">{$sname|escape}</label></li>
+{/foreach}
+</ul>
+
+<p><input type="submit" name="submit" value="Generate" id="submit" /></p>
+
+</form>
+
+<p>Use the form above to generate a report that shows the breakdown of reservations by department, given for the date range you specify.</p>
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

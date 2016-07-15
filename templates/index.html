@@ -1,0 +1,23 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+<div id="schedule_wrapper">
+{include file='schedule.html'}
+</div>
+
+</div><!-- /#content -->
+
+<div id="sidebar">
+
+{if !$loggedIn}
+{	include file='sidebars/login.html'}
+{elseif $user->isAdmin()}
+{	include file='sidebars/admin_sidebar.html'}
+{else}
+{	include file='sidebars/user_sidebar.html'}
+{/if}
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

@@ -1,0 +1,15 @@
+{if count($passErrors)}
+<div class="error">
+{	foreach from=$passErrors item='e'}
+{$e}<br />
+{	/foreach}
+</div>
+{/if}
+
+{if count($passMessages)}
+<div class="message">
+{	foreach from=$passMessages item='m'}
+{$m}<br />
+{	/foreach}
+</div>
+{/if}

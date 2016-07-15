@@ -1,0 +1,78 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+{include file='layout/notify.html'}
+
+<table class="show_user">
+<tr>
+	<th>Username:</th>
+	<td>{$showUser->username|escape} ({mailto address=$showUser->getEmail()})</td>
+</tr>
+<tr>
+	<th>Name:</th>
+	<td>{$showUser->getName()}</td>
+</tr>
+<tr>
+	<th>Department:</th>
+	<td>{$showUser->getDepartment()|default:'none'}</td>
+</tr>
+<tr>
+	<th>Active?:</th>
+	<td>{if $showUser->active}yes{else}no{/if}</td>
+</tr>
+<tr>
+	<th>Admin?:</th>
+	<td>{if $showUser->isAdmin()}yes{else}no{/if}</td>
+</tr>
+<tr>
+	<th>Groups:</th>
+	<td>{group_links groups=$showUser->getGroups() ctl=$ctl}</td>
+</tr>
+</table>
+
+<form method="post" action="{$ctl->url('manage_users','send_account_notification',$showUser->id)|escape}" class="sidebar_form" onsubmit="return confirm('Are you sure you want to send the notification email?')">
+	<p>Click the button below to send this user an email with login instructions.</p>
+	<p><input type="submit" value="Send Account Notification" /></p>
+</form>
+
+<h2>Upcoming Reservations</h2>
+
+{if count($upcomingReservations)}
+{	assign var='reservations' value=$upcomingReservations}
+{	include file='partials/reservation_table.html'}
+{else}
+<p>This user has no upcoming reservations.</p>
+{/if}
+
+{if count($pastReservations)}
+<h2>Past Reservations</h2>
+
+{	assign var='reservations' value=$pastReservations}
+{	include file='partials/reservation_table.html'}
+{else}
+<p>This user has no past reservations.</p>
+{/if}
+
+<script type="text/javascript">
+{literal}
+//<![CDATA[
+function confirmMark() {
+	return confirm('Are you sure you want to mark this reservation as a no-show? '+
+		'Doing this will open up the slot on the schedule for reservation.');
+}
+//]]>
+{/literal}
+</script>
+
+</div>
+
+<div id="sidebar">
+
+<p class="create_account"><a href="{$ctl->url('manage_users','edit',$showUser->id)|escape}">Edit Account &raquo;</a></p>
+
+<p><a href="{$ctl->url('manage_users')|escape}">Back to list of Accounts</a></p>
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

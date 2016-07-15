@@ -1,0 +1,11 @@
+<ul id="adminNav">
+	<li><a href="index.php"{if $adminNavSelected == 'reservations'} class="selected"{/if}>Reservations</a></li>
+	<li><a href="manage_users.php"{if $adminNavSelected == 'users'} class="selected"{/if}>Accounts</a></li>
+	<li><a href="manage_groups.php" {if $adminNavSelected == 'groups'} class="selected"{/if}>Groups</a></li>
+{if $user->isAdmin()}
+	<li><a href="manage_schedule.php"{if $adminNavSelected == 'schedule'} class="selected"{/if}>Schedules</a></li>
+	<li><a href="reports.php"{if $adminNavSelected == 'reports'} class="selected"{/if}>Reports</a></li>
+	<li><a href="logs.php"{if $adminNavSelected == 'log'} class="selected"{/if}>Log</a></li>
+{/if}
+	<li class="logout"><a href="{$ctl->url('authentication','logout')}">Logout</a></li>
+</ul>

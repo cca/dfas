@@ -1,0 +1,26 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+<form action="{$ctl->url('reservation','confirm_cancel')}" method="post">
+
+<p>Are you sure you want to cancel the reservation for:<br />
+<b>{$schedule->name|escape}</b><br />
+{$date|date_format:'%A, %B %e, %Y'} at {$time|date_format:'%l:%M %p'}?</p>
+
+<p><input type="submit" value="Yes, cancel it." style="margin-right: 20px;" />
+<a href="index.php?date={$date}&amp;schedule={$schedule->id}">No, keep it.</a>
+</p>
+
+<input type="hidden" name="schedule" value="{$schedule->id}" />
+<input type="hidden" name="date" value="{$date}" />
+<input type="hidden" name="time" value="{$time}" />
+</form>
+
+</div>
+
+<div id="sidebar">
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

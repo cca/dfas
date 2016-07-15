@@ -1,0 +1,83 @@
+{include file='layout/header.html'}
+
+<div id="content">
+
+{if count($error)}
+<div class="error">
+{	if $error.no_username}Username is empty.<br />{/if}
+{	if $error.no_first_name}First Name is empty.<br />{/if}
+{	if $error.no_last_name}Last Name is empty.<br />{/if}
+{	if $error.no_department}No Department specified.<br />{/if}
+{	if $error.username_exists}That username is already in use.<br />{/if}
+{	if $error.non_user}You are not allowed to create or edit non-user accounts.<br />{/if}
+</div>
+{/if}
+
+<div id="member_list" class="content_wrapper">
+	
+{include file='ajax/member_list.html'}
+
+</div><!-- /#member_list -->
+
+</div>
+
+<div id="sidebar">
+
+<h2>Add a Member</h2>
+
+<p>Start typing the name or username of a user, then select it from the dropdown list that appears.</p>
+
+<div class="sidebar_form">
+
+<p><label for="member_search">Name/Username:</label>
+<input type="text" name="member_search" value="" id="member_search" /></p>
+<div id="member_info" class="choice_box"></div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var groupId = {$group->id};
+new Ajax.Autocompleter('member_search','member_info','{$ctl->url('manage_groups','ajax_member_search')}',{literal}
+	{
+		afterUpdateElement: function(input, item) {
+			input.value = '';
+			{/literal}
+			new Ajax.Updater('member_list','{$ctl->url('manage_groups','ajax_add_member')}',{literal}{
+				parameters: {
+					group_id: groupId,
+					user_id: item.getElementsBySelector('span.id')[0].innerHTML
+				}
+			});
+		}
+	});
+
+function removeMember(gId, uId) {
+	{/literal}
+	new Ajax.Updater('member_list','{$ctl->url('manage_groups','ajax_remove_member')}',{literal}{
+		parameters: {
+			group_id: gId,
+			user_id: uId
+		}
+	});
+	return false;
+}
+
+{/literal}	
+//]]>
+</script>
+
+<h2>Member Access</h2>
+
+{if count($rules)}
+<ul class="myReservations">
+{	foreach from=$rules item='rule'}
+<li>{$rule->getDescription()}</li>
+{	/foreach}
+</ul>
+{else}
+<p>No access has been set up for this group.</p>
+{/if}
+
+</div><!-- /#sidebar -->
+
+{include file='layout/footer.html'}

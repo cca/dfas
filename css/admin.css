@@ -1,0 +1,328 @@
+ul#adminNav {
+	background: url('../images/admin_nav_bg.gif') bottom left repeat-x;
+	border-bottom: 1px solid #3AA7C1;
+	list-style: none;
+	height: 22px;
+	padding: 0 0 0 10px;
+	margin: 0 0 10px 0;
+}
+ul#adminNav li {
+	float: left;
+	padding: 0;
+	margin: 0 4px 0 0;
+}
+ul#adminNav a {
+	background: #3AA7C1;
+	color: #fff;
+	border: 1px solid #3AA7C1;
+	border-bottom: none;
+	display: block;
+	font-size: 12px;
+	line-height: 12px;
+	padding: 5px 10px;
+	text-decoration: none;
+}
+ul#adminNav a.selected {
+	color: #3AA7C1;
+	background: #fff;
+}
+ul#adminNav a:hover {
+	background: #6cbfd3;
+	color: #fff;
+}
+ul#adminNav li.logout {
+	float: right;
+}
+ul#adminNav li.logout a {
+	background: transparent;
+	border: none;
+	color: #3AA7C1;
+	font-size: 11px;
+	padding-top: 0;
+	text-decoration: underline;
+}
+
+form#search_form {
+	background: #efefe0;
+	margin: 0 10px 10px;
+	padding: 10px 0 0 0;
+}
+
+.sidebar_form {
+	background: #efefe0;
+	margin: 0 10px 20px;
+	padding: 10px 0 0 0;
+}
+.sidebar_form ul {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 10px 10px;
+}
+.sidebar_form li {
+	padding: 0;
+	margin: 0;
+}
+
+div#search_results {
+	margin: 0 10px 10px;
+}
+
+table.user_list {
+	border-collapse: collapse;
+	width: 100%;
+}
+table.user_list th {
+	padding: 3px 5px;
+	text-align: left;
+}
+table.user_list td {
+	border-top: 1px solid #999;
+	padding: 3px 5px;
+}
+table.user_list tr.inactive td {
+	color: #999;
+}
+tr.highlight td {
+	background: #ffc;
+}
+tr.no_show td {
+	background: #fcc;
+}
+
+a.little_button {
+	background: #eee;
+	font-size: 9px;
+	padding: 2px;
+	margin-left: 3px;
+	text-decoration: none;
+}
+a.little_button:hover {
+	background: #336699;
+}
+
+table.show_user {
+	border-collapse: collapse;
+	margin: 0 0 10px 10px;
+}
+table.show_user th {
+	text-align: left;
+	padding: 2px 10px 2px 0;
+}
+
+#user_reserve_mode,
+#other_reserve_mode {
+	background: #efefe0;
+	margin: 0 10px 20px;
+	padding: 10px 0;
+}
+#user_info {
+	background: #fffff0;
+	padding: 10px;
+	margin: 0 10px;
+}
+
+#user_form {
+	background: #efefe0;
+	margin: 0 10px;
+	padding: 10px 0 0 0;
+}
+#user_form label {
+	float: left;
+	font-weight: bold;
+	margin: 0 5px 0 0;
+	text-align: right;
+	width: 115px;
+}
+#user_form #reservations_left {
+	width: 50px;
+}
+#user_form p.notifyBox {
+	background: #fffff0;
+	padding: 3px 0;
+	margin: 0 20px 10px;
+}
+#user_form p.notifyBox label {
+	width: 105px;
+}
+#user_form input.checkbox,
+#user_form input#active,
+#user_form input#notify {
+	vertical-align: middle;
+}
+#user_form #submit {
+	font-size: 13px;
+	font-weight: bold;
+	margin-left: 120px;
+}
+#user_form #cancel {
+	font-size: 13px;
+	margin-left: 15px;
+}
+
+#delete_form {
+	background: #efefe0;
+	margin: 0 10px;
+	padding: 10px 0 0 0;
+	text-align: right;
+}
+#delete_form hr {
+	margin: 0 20px 20px 20px;
+	padding: 0;
+}
+#delete_form #submit_delete {
+	font-size: 11px;
+	font-weight: bold;
+	display: inline;
+}
+
+#reservations_left_form {
+	background: #efefe0;
+	margin: 0 10px;
+	padding: 10px 0 0 0;
+}
+#reservations_left_form label {
+	float: left;
+	font-weight: bold;
+	margin: 0 5px 0 0;
+	text-align: right;
+	width: 115px;
+}
+#reservations_left_form #submit {
+	font-size: 13px;
+	font-weight: bold;
+	margin-left: 120px;
+}
+#reservations_left_form #cancel {
+	font-size: 13px;
+	margin-left: 15px;
+}
+
+div#schedule_controls span.thisMonth {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+table.schedule {
+	margin-bottom: 10px;
+}
+table.schedule td.closed,
+table.schedule td.closed div.dayOfMonth {
+	background: #f3f3f3;
+}
+table.schedule td.closed select {
+	visibility: hidden;
+}
+table.schedule td.windowError {
+	background: #f99;
+}
+table.schedule div.dayOfMonth {
+	background: #eef;
+	font-size: 9px;
+	color: #667;
+	padding: 2px 5px;
+	text-align: right;
+}
+table.schedule span.dayOfMonth {
+	float: left;
+	font-weight: bold;
+	padding: 3px 0 0 0;
+}
+table.schedule input.checkbox {
+}
+table.schedule div.times {
+	padding: 5px 5px 5px;	
+}
+table.schedule select {
+	color: #334;
+	font-size: 9px;
+	font-weight: bold;
+	margin: 0 0 3px 0;
+}
+
+#schedule_form #submit {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+p.create_account {
+	border-bottom: 1px solid #efefe0;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0 0 10px 0;
+	margin: 10px;
+}
+
+table.report {
+	border-collapse: collapse;
+	margin: 0 10px 20px;
+}
+table.report th {
+	text-align: left;
+	padding: 5px 15px 5px 5px;
+}
+table.report td {
+	border-top: 1px solid #999;
+	padding: 5px 5px;
+}
+table.report span.small {
+	margin-left: 5px;
+	font-size: 9px;
+}
+div.legend {
+	margin: 0 10px 20px;
+	padding: 0 0;
+}
+div.legend dl {
+	margin: 0;
+	padding: 0;
+}
+div.legend dl dt {
+	font-weight: bold;
+}
+div.legend dl dd {
+	margin: 0 0 3px 0;
+	padding: 0 0 3px 10px;
+	border-bottom: 1px solid #999;
+}
+
+table.log {
+	border-collapse: collapse;
+	margin: 0 10px;
+}
+table.log th {
+	font-size: 9px;
+	text-align: left;
+	padding: 3px 10px;
+}
+table.log td {
+	font-size: 9px;
+	padding: 3px 10px;
+}
+table.log td.date {
+	font-weight: bold;
+	width: 75px;
+}
+table.log td.time,
+table.log td.message {
+	border-top: 1px solid #eee;
+}
+table.log tr.newDate td {
+	border-top: 1px solid #999;
+}
+table.log td.notice {
+	font-weight: bold;
+}
+table.log td.warning {
+	background: #fcc;
+	font-weight: bold;
+}
+
+table.reservations {
+	border-collapse: collapse;
+	margin: 0 0 20px 10px;
+	width: 500px;
+}
+table.reservations td {
+	border-top: 1px solid #cdc;
+	padding: 3px 10px 3px 3px;
+}
