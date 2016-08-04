@@ -11,8 +11,8 @@ if(DEV) {
 else {
   // server/db config variables
   define('SITE_URL','https://dfas.cca.edu');
-  define('SITE_PATH', '/opt/html/dfas');
-  define('DSN','mysql://USERNAME:PASSWORD@HOST/DBNAME');  
+  define('SITE_PATH', '/opt/www/dfas');
+  define('DSN','mysql://scottdb:scottdb1017@vm-mysql-05.cca.edu/dfassched');
 }
 
 // URL of the ETS site, no trailing slash
